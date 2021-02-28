@@ -1,0 +1,35 @@
+name: SonarQube Scanner
+description: runs sonar-scanner-cli docker container with cache for its modules
+author: William Artero
+branding:
+  icon: box
+  color: blue
+inputs:
+  version:
+    description: docker image version
+    required: false
+  token:
+    description: SonarCloud token to login
+    required: true
+  work-dir:
+    description: absolute work directory within the container
+    required: false
+    default: /usr/src
+  home:
+    description: local sonar user home directory
+    required: true
+outputs:
+  cache-path:
+    description: sonar user cache path
+    value: ${{ steps.run.outputs.cache-path }}
+runs:
+  using: composite
+  steps:
+  - id: run
+    run: ${{ github.action_path }}/action.bash
+    shell: bash
+    env:
+      VERSION: ${{ inputs.version }}
+      SONAR_TOKEN: ${{ inputs.token }}
+      WORK_DIR: ${{ inputs.work-dir }}
+      LOCAL_SONAR_USER_HOME: ${{ inputs.home }}

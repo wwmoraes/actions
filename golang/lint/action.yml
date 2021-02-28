@@ -1,0 +1,38 @@
+name: Go Lint
+description: lints golang code using golangci-lint
+author: William Artero
+branding:
+  icon: box
+  color: blue
+inputs:
+  version:
+    description: docker image version
+    required: false
+    default: v1.32-alpine
+  format:
+    description: report output format
+    required: false
+    default: checkstyle
+  report-file:
+    description: report output file path/name
+    required: false
+    default: golangci-lint-report.xml
+  work-dir:
+    description: absolute work directory within the container
+    required: false
+    default: /usr/src
+outputs:
+  report-file:
+    description: report output file path/name
+    value: ${{ steps.run.outputs.report-file }}
+runs:
+  using: composite
+  steps:
+  - id: run
+    run: ${{ github.action_path }}/action.bash
+    shell: bash
+    env:
+      VERSION: ${{ inputs.version }}
+      OUTPUT_FORMAT: ${{ inputs.format }}
+      OUTPUT_FILE: ${{ inputs.report-file }}
+      WORK_DIR: ${{ inputs.work-dir }}

@@ -1,0 +1,11 @@
+name: Go Env
+description: sets Github environment variables with go env values
+author: William Artero
+branding:
+  icon: box
+  color: blue
+runs:
+  using: composite
+  steps:
+  - run: ${{ github.action_path }}/action.bash
+    shell: bash

@@ -1,0 +1,37 @@
+name: Go Test
+description: tests golang code and generates both a coverage profile as test report
+author: William Artero
+branding:
+  icon: box
+  color: blue
+inputs:
+  flags:
+    description: extra flags to pass to go test
+    required: false
+  cover-profile:
+    description: cover profile file path/name
+    required: false
+  packages:
+    description: package names to be built
+    required: false
+  report-file:
+    description: JSON report file path/name
+    required: false
+outputs:
+  cover-profile:
+    description: cover profile file path/name
+    value: ${{ steps.run.outputs.cover-profile }}
+  report-file:
+    description: JSON report file path/name
+    value: ${{ steps.run.outputs.report-file }}
+runs:
+  using: composite
+  steps:
+  - id: run
+    run: ${{ github.action_path }}/action.bash
+    shell: bash
+    env:
+      GOLANG_TEST_FLAGS: ${{ inputs.flags }}
+      GOLANG_COVERPROFILE: ${{ inputs.cover-profile }}
+      GOLANG_PACKAGES: ${{ inputs.packages }}
+      GOLANG_REPORTFILE: ${{ inputs.report-file }}

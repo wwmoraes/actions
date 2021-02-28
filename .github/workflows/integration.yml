@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+    tags:
+    - '*'
+    paths:
+    - '**.bash'
+    - '**.sh'
+    - '**.bats'
+  pull_request:
+    branches:
+    - master
+    paths:
+    - '**.bash'
+    - '**.sh'
+    - '**.bats'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: lint
+      run: make lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: test
+      run: make test

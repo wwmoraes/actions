@@ -1,0 +1,29 @@
+name: Go Build
+description: builds a golang binary, with module, vendor and build caching
+author: William Artero
+branding:
+  icon: box
+  color: blue
+inputs:
+  flags:
+    description: extra flags to pass to go build
+    required: false
+  output-dir:
+    description: binary output directory
+    required: false
+  output-bin:
+    description: built binary name
+    required: false
+  packages:
+    description: package names to be built
+    required: false
+runs:
+  using: composite
+  steps:
+  - run: ${{ github.action_path }}/action.bash
+    shell: bash
+    env:
+      GOLANG_BUILD_FLAGS: ${{ inputs.flags }}
+      GOLANG_OUTPUT_DIR: ${{ inputs.output-dir }}
+      GOLANG_OUTPUT_BIN: ${{ inputs.output-bin }}
+      GOLANG_PACKAGES: ${{ inputs.packages }}
