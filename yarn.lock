@@ -17,7 +17,7 @@ bats-support@^0.3.0:
   resolved "https://registry.yarnpkg.com/bats-support/-/bats-support-0.3.0.tgz#a1f6b8878d2a51837911fdffa0750036f60701ef"
   integrity sha512-z+2WzXbI4OZgLnynydqH8GpI3+DcOtepO66PlK47SfEzTkiuV9hxn9eIQX+uLVFbt2Oqoc7Ky3TJ/N83lqD+cg==
 
-bats@^1.3.0-alpha.0:
-  version "1.3.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/bats/-/bats-1.3.0-alpha.0.tgz#4ded1c7c49d09244bac7deab7b15a2950eef9165"
-  integrity sha512-4Um6nbjmlqfisR8kQAeTSUW8NX8KSG/OakqVixKyW4RO2zSNVqaxEP4I7HhWSewv3HlOCQ/gnO1Wc/Vi8wrgTQ==
+bats@^1.6.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/bats/-/bats-1.7.0.tgz#caae958b1d211eda6b1322ac7792515de40165a2"
+  integrity sha512-pt5zjJQUB4+JI8Si+z/IAWc8yhMyhdZs6IXMCKgzF768dUIyW5xyBstWtDI5uGSa80v7UQOhh+w0GA4p4+01Bg==

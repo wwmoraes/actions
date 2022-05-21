@@ -5,7 +5,7 @@
   "author": "William Artero <william@artero.dev>",
   "license": "MIT",
   "dependencies": {
-    "bats": "^1.3.0-alpha.0",
+    "bats": "^1.6.0",
     "bats-assert": "^2.0.0",
     "bats-mock": "^1.0.1",
     "bats-support": "^0.3.0"
