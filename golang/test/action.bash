@@ -9,8 +9,8 @@ set -Eeuo pipefail
 
 : "${GOLANG_FLAGS:=-race -mod=vendor}"
 
-echo "::set-output name=cover-profile::${GOLANG_COVERPROFILE}"
-echo "::set-output name=report-file::${GOLANG_REPORTFILE}"
+echo "cover-profile=${GOLANG_COVERPROFILE}" >> "${GITHUB_OUTPUT}"
+echo "report-file=${GOLANG_REPORTFILE}" >> "${GITHUB_OUTPUT}"
 
 # shellcheck disable=SC2086
 go test ${GOLANG_FLAGS} ${GOLANG_TEST_FLAGS} \

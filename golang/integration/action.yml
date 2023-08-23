@@ -1,16 +1,23 @@
-name: Go Unit Test
+name: Go Integration Test
 description: >-
-  tests golang code and generates both a coverage profile and a test report
+  instruments and collects coverage from a golang application using
+  https://go.dev/testing/coverage/
 author: William Artero
 branding:
   icon: box
   color: blue
 inputs:
-  flags:
-    description: extra flags to pass to go test
+  cover-dir:
+    description: directory that for the instrumentation coverage result
+    required: false
+  run-flags:
+    description: extra build/run flags to pass to go run
     required: false
   cover-profile:
     description: cover profile file path/name
+    required: false
+  coverage-packages:
+    description: package names to include in the report
     required: false
   packages:
     description: package names to be built
@@ -32,7 +39,9 @@ runs:
     run: ${{ github.action_path }}/action.bash
     shell: bash
     env:
-      GOLANG_TEST_FLAGS: ${{ inputs.flags }}
+      GOCOVERDIR: ${{ inputs.cover-dir }}
+      GOLANG_COVERAGE_PACKAGES: ${{ inputs.coverage-packages }}
       GOLANG_COVERPROFILE: ${{ inputs.cover-profile }}
       GOLANG_PACKAGES: ${{ inputs.packages }}
       GOLANG_REPORTFILE: ${{ inputs.report-file }}
+      GOLANG_RUN_FLAGS: ${{ inputs.run-flags }}
