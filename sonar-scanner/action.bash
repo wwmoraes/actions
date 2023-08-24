@@ -15,7 +15,7 @@ declare GITHUB_WORKSPACE
 
 mkdir -p "${LOCAL_SONAR_USER_HOME}"
 
-echo "::set-output name=cache-path::${LOCAL_SONAR_USER_HOME}/cache"
+echo "cache-path=${LOCAL_SONAR_USER_HOME}/cache" >> "${GITHUB_OUTPUT}"
 
 docker run --rm -a STDOUT -a STDERR \
   --user "${UID}:${GID}" \

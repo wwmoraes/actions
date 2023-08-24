@@ -19,7 +19,7 @@ mkdir -p "${GOMODCACHE}";
 mkdir -p "${GOCACHE}";
 mkdir -p "${CACHE_DIR}";
 
-echo "::set-output name=report-file::${OUTPUT_FILE}"
+echo "report-file=${OUTPUT_FILE}" >> "${GITHUB_OUTPUT}"
 
 docker run --rm -a STDOUT -a STDERR \
   --mount "type=bind,source=${GOMODCACHE},target=/go/pkg/mod,consistency=cached" \
