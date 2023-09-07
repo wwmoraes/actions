@@ -9,5 +9,14 @@
     "bats-assert": "^2.0.0",
     "bats-mock": "^1.0.1",
     "bats-support": "^0.3.0"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/docker/*",
+      "packages/golang/*"
+    ]
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
   }
 }

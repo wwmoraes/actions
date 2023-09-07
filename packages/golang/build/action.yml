@@ -8,6 +8,7 @@ inputs:
   flags:
     description: extra flags to pass to go build
     required: false
+    default: -race -mod=readonly
   output-dir:
     description: binary output directory
     required: false
@@ -18,12 +19,5 @@ inputs:
     description: package names to be built
     required: false
 runs:
-  using: composite
-  steps:
-  - run: ${{ github.action_path }}/action.bash
-    shell: bash
-    env:
-      GOLANG_BUILD_FLAGS: ${{ inputs.flags }}
-      GOLANG_OUTPUT_DIR: ${{ inputs.output-dir }}
-      GOLANG_OUTPUT_BIN: ${{ inputs.output-bin }}
-      GOLANG_PACKAGES: ${{ inputs.packages }}
+  using: node16
+  main: dist/index.js
