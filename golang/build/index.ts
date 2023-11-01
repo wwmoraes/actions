@@ -11,7 +11,7 @@ export async function run(): Promise<void> {
   core.debug(`creating directory tree '${outputDir}'`);
   await io.mkdirP(outputDir);
 
-  await exec.exec(`go build ${flags}`, ["-o", `${outputDir}/${outputBin}`, packages]);
+  await exec.exec(`go build -v ${flags}`, ["-o", `${outputDir}/${outputBin}`, packages]);
 };
 
 // run();
