@@ -1,9 +1,4 @@
 {
   "npmClient": "yarn",
-  "packages": [
-    "packages/docker/*",
-    "packages/golang/*"
-  ],
-  "useWorkspaces": true,
   "version": "0.0.0"
 }

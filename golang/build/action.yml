@@ -17,7 +17,7 @@ inputs:
     description: built binary name
     required: false
   packages:
-    description: package names to be built
+    description: package names to build
     default: ./...
     required: false
 runs:
