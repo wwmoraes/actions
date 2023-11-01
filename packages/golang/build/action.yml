@@ -11,12 +11,14 @@ inputs:
     default: -race -mod=readonly
   output-dir:
     description: binary output directory
+    default: ./
     required: false
   output-bin:
     description: built binary name
     required: false
   packages:
     description: package names to be built
+    default: ./...
     required: false
 runs:
   using: node16
