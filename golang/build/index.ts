@@ -14,4 +14,4 @@ export async function run(): Promise<void> {
   await exec.exec(`go build -v ${flags}`, ["-o", `${outputDir}/${outputBin}`, packages]);
 };
 
-// run();
+run();
