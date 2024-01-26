@@ -10,7 +10,7 @@ GOCACHE=/root/.cache/go-build
 GOMODCACHE=/go/pkg/mod
 
 function setup() {
-  export GITHUB_ENV=$(mktemp)
+  export GITHUB_OUTPUT=$(mktemp)
   stub go \
     "env GOCACHE : echo '${GOCACHE}'" \
     "env GOMODCACHE : echo '${GOMODCACHE}'"
@@ -18,8 +18,8 @@ function setup() {
 
 function teardown() {
   unstub go
-  rm "${GITHUB_ENV}"
-  unset GITHUB_ENV
+  rm "${GITHUB_OUTPUT}"
+  unset GITHUB_OUTPUT
 }
 
 @test "golang env set successfully" {
@@ -32,7 +32,7 @@ function teardown() {
   WANT="GOCACHE=${GOCACHE}"
 
   run "${BATS_TEST_DIRNAME}/${SCRIPT}"
-  run cat "${GITHUB_ENV}"
+  run cat "${GITHUB_OUTPUT}"
   assert_line "${WANT}"
 }
 
@@ -40,6 +40,6 @@ function teardown() {
   WANT="GOMODCACHE=${GOMODCACHE}"
 
   run "${BATS_TEST_DIRNAME}/${SCRIPT}"
-  run cat "${GITHUB_ENV}"
+  run cat "${GITHUB_OUTPUT}"
   assert_line "${WANT}"
 }

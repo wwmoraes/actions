@@ -2,9 +2,9 @@
 
 set -Eeuo pipefail
 
-declare GITHUB_ENV
+declare GITHUB_OUTPUT
 
-echo "GOCACHE=$(go env GOCACHE)" >> "${GITHUB_ENV}"
-echo "GOMODCACHE=$(go env GOMODCACHE)" >> "${GITHUB_ENV}"
+echo "GOCACHE=$(go env GOCACHE)" >> "${GITHUB_OUTPUT}"
+echo "GOMODCACHE=$(go env GOMODCACHE)" >> "${GITHUB_OUTPUT}"
 
-export GITHUB_ENV
+export GITHUB_OUTPUT
