@@ -25,13 +25,14 @@ function teardown() {
 @test "golang env set successfully" {
   run "${BATS_TEST_DIRNAME}/${SCRIPT}"
   [ "$status" -eq 0 ]
-  [ "$output" = "" ]
 }
 
 @test "golang env set GOCACHE successfully" {
   WANT="GOCACHE=${GOCACHE}"
 
   run "${BATS_TEST_DIRNAME}/${SCRIPT}"
+  assert_line "${WANT}"
+
   run cat "${GITHUB_OUTPUT}"
   assert_line "${WANT}"
 }
@@ -40,6 +41,8 @@ function teardown() {
   WANT="GOMODCACHE=${GOMODCACHE}"
 
   run "${BATS_TEST_DIRNAME}/${SCRIPT}"
+  assert_line "${WANT}"
+
   run cat "${GITHUB_OUTPUT}"
   assert_line "${WANT}"
 }
