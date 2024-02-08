@@ -1,6 +1,13 @@
 name: Go Env
 description: sets Github environment variables with go env values
 author: William Artero
+outputs:
+  GOCACHE:
+    description: Go's GOCACHE environment value
+    value: ${{ steps.action.outputs.GOCACHE }}
+  GOMODCACHE:
+    description: Go's GOMODCACHE environment value
+    value: ${{ steps.action.outputs.GOMODCACHE }}
 branding:
   icon: box
   color: blue
@@ -9,3 +16,4 @@ runs:
   steps:
   - run: ${{ github.action_path }}/action.bash
     shell: bash
+    id: action
