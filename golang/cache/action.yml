@@ -1,0 +1,45 @@
+name: Go Cache
+description: setups caches for golang modules and builds
+author: William Artero
+branding:
+  icon: box
+  color: blue
+inputs:
+  modules-predicate:
+    description: cache key predicate that refers to the modules cache
+    required: false
+    default: modules
+  build-predicate:
+    description: cache key predicate that refers to the build cache
+    required: false
+    default: build
+runs:
+  using: composite
+  steps:
+  - name: set golang environment variables
+    shell: bash
+    run: |-
+      set -Eeuo pipefail
+
+      declare GITHUB_OUTPUT
+
+      echo "GOCACHE=$(go env GOCACHE)" | tee -a "${GITHUB_OUTPUT}"
+      echo "GOMODCACHE=$(go env GOMODCACHE)" | tee -a "${GITHUB_OUTPUT}"
+
+      export GITHUB_OUTPUT
+  - name: cache modules
+    uses: pat-s/always-upload-cache@v3
+    with:
+      path: ${GOMODCACHE}
+      key: ${{ runner.os }}-${{ inputs.modules-predicate }}-${{ hashFiles('go.sum') }}
+      restore-keys: |
+        ${{ runner.os }}-${{ inputs.modules-predicate }}-${{ hashFiles('go.sum') }}
+        ${{ runner.os }}-${{ inputs.modules-predicate }}-
+  - name: cache build
+    uses: pat-s/always-upload-cache@v3
+    with:
+      path: ${GOCACHE}
+      key: ${{ runner.os }}-${{ inputs.build-predicate }}-${{ hashFiles('**/*.go') }}
+      restore-keys: |
+        ${{ runner.os }}-${{ inputs.build-predicate }}-${{ hashFiles('**/*.go') }}
+        ${{ runner.os }}-${{ inputs.build-predicate }}-
