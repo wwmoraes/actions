@@ -17,20 +17,15 @@ runs:
   using: composite
   steps:
   - name: set golang environment variables
+    id: go-env
     shell: bash
     run: |-
-      set -Eeuo pipefail
-
-      declare GITHUB_OUTPUT
-
       echo "GOCACHE=$(go env GOCACHE)" | tee -a "${GITHUB_OUTPUT}"
       echo "GOMODCACHE=$(go env GOMODCACHE)" | tee -a "${GITHUB_OUTPUT}"
-
-      export GITHUB_OUTPUT
   - name: cache modules
     uses: pat-s/always-upload-cache@v3
     with:
-      path: ${GOMODCACHE}
+      path: ${{ steps.go-env.outputs.GOMODCACHE }}
       key: ${{ runner.os }}-${{ inputs.modules-predicate }}-${{ hashFiles('go.sum') }}
       restore-keys: |
         ${{ runner.os }}-${{ inputs.modules-predicate }}-${{ hashFiles('go.sum') }}
@@ -38,7 +33,7 @@ runs:
   - name: cache build
     uses: pat-s/always-upload-cache@v3
     with:
-      path: ${GOCACHE}
+      path: ${{ steps.go-env.outputs.GOCACHE }}
       key: ${{ runner.os }}-${{ inputs.build-predicate }}-${{ hashFiles('**/*.go') }}
       restore-keys: |
         ${{ runner.os }}-${{ inputs.build-predicate }}-${{ hashFiles('**/*.go') }}
